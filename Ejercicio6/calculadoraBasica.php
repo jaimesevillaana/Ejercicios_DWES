@@ -1,5 +1,18 @@
 <?php
 
+//Funcion leer número para validar
+function leerNumero($mensaje) {
+    do {
+        echo $mensaje;
+        $entrada = trim(fgets(STDIN));
+        if (is_numeric($entrada)) {
+            return $entrada + 0; // Convertir a número
+        } else {
+            echo "Entrada no válida. Por favor, ingrese un número.\n";
+        }
+    } while (!is_numeric($entrada));
+}
+
 //Funciones normales
 function suma($a, $b) {
     return $a + $b;
@@ -60,16 +73,24 @@ do {
     echo "Seleccione una opción (1-4): ";
 
     $opcion = trim(fgets(STDIN));
+
+    //validar que la opcion es válida (numeros entre 0 y 4)
+    if (!is_numeric($opcion) || $opcion < 0 || $opcion > 4) {
+        echo "Opción no válida. Por favor, selecciona una opcion del 0 al 4.\n";
+        continue; //volver al inicio del bucle
+    }
+
+    $opcion = (int)$opcion; 
+
+    //si la opción es 0, termina el bucle
     if ($opcion == 0) {
         echo "Adios! Gracias por participar!\n";
         break;
     }
 
-    echo "Ingresa el primer número: ";
-    $num1 = trim(fgets(STDIN));
-
-    echo "Ingresa el segundo número: ";
-    $num2 = trim(fgets(STDIN));
+    //pedir números solo si la opción es válida (1-4)
+    $num1 = leerNumero("Ingresa el primer número: ");
+    $num2 = leerNumero("Ingresa el segundo número: ");
 
     switch ($opcion) {
         case 1:
@@ -96,4 +117,4 @@ do {
             echo "Opción no válida. Por favor, seleccione una opción del 0 al 4.\n";
     }
 
-} while (!$salir);
+} while ('!== 0');
