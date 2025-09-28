@@ -87,7 +87,7 @@ abstract class Material {
 
         public function buscarPorTitulo(string $titulo) {
             foreach ($this -> materiales as $material) {
-                if (stripos($material -> getTitulo(), $titulo) !== false) {
+                if (strpos($material -> getTitulo(), $titulo) !== false) {
                     echo " Encontrado: " . $material -> mostrar() . "\n";
                     return;
                 }
